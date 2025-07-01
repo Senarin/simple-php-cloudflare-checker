@@ -38,10 +38,16 @@ body{
 
 input,button{font-family: inherit;}
 
+#check-form{
+    text-align: center;
+    margin: auto;
+    max-width: 100%;
+}
+
 #host{
     text-align: center !important;
-    margin: auto;
-    max-width: 70%;
+    width: 64%;
+    max-width: 72%;
 }
 
 textarea{font-family: D2Coding, "D2 coding", monospace !important;}

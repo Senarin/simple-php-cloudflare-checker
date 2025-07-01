@@ -19,7 +19,7 @@
 <br />아래 입력란에 도메인명을 입력하고 "Scan" 버튼을 클릭하면 해당 도메인이 Cloudflare를 사용하고 있는지 확인할 수 있습니다.</p>
 
 <div id="check-form">
-도메인명 : <input type="text" name="hostname" id="host" placeholder="www.example.com" />
+도메인명 : <input type="text" name="hostname" id="host" placeholder="www.example.com" size="16" />
 <button id="cf-scan" onclick="doCheckHost();">Scan</button>
 <br />
 <input type="checkbox" id="check-cdn" checked /><label for="check-cdn">자세한 정보 보기</label>
