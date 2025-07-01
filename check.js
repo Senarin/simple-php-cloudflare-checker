@@ -30,7 +30,7 @@ function doCheckHost(){
          var ip6Addr = data.resolv_addr.v6;
          var ip6Text = document.createTextNode(`감지된 IPv6 주소: ${ip6Addr}`);
          var ip6Display = document.createElement("li");
-         ip6Display.appendChild(ip4Text);
+         ip6Display.appendChild(ip6Text);
          resList.appendChild(ip6Display);
         }
 
