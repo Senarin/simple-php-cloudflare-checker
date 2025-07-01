@@ -115,10 +115,15 @@ function ip6AddressInNet($ip, $sub, $prefix){
 
 $target_host = $_GET["host"];
 $resolv_mode = $_GET["resolve"] ?? "v4";
+$resolv_addr = [];
 
 if(!is_null($target_host)){
   $ip4 = gethostbynamel($target_host)[0] ?? null;
-  if($resolv_mode == "v6"){$ip6 = dns_get_record($target_host, DNS_AAAA)[0]['ipv6'] ?? null;}
+  $resolv_addr["v4"] = $ip4;
+  if($resolv_mode == "v6"){
+   $ip6 = dns_get_record($target_host, DNS_AAAA)[0]['ipv6'] ?? null;
+   $resolv_addr["v6"] = $ip6;
+  }
 }else{
   echo json_encode(["error" => "No host provided"]);
   exit;
@@ -154,8 +159,7 @@ foreach($url_check as $header_line){
 
 $out_info = [
     "hostname" => $target_host,
-    "resolv_addr_v4" => $ip4 ?? null,
-    "resolv_addr_v6" => $ip6 ?? null,
+    "resolv_addr" => $resolv_addr,
     "is_cloudflare" => $is_cf,
     "host_timestamp" => $host_datetime,
     "cf_hostinfo" => ($is_cf != false) ? [
