@@ -125,7 +125,7 @@ if(!is_null($target_host)){
 }
 
 foreach(explode("\n",$cloudflare_ranges_v4) as $range) {
-    if(ip4AddressInRange($ip6,trim($range))){
+    if(ip4AddressInRange($ip4,trim($range))){
      $is_cf = true;
      break;
     }else{$is_cf = false;}
