@@ -7,7 +7,7 @@ function doCheckHost(){
  var check_cdn = document.getElementById("check-cdn").checked;
  var check_ip6 = document.getElementById("check-ip6").checked;
 
- fetch(`./api.php?host=${in_host}&h=${check_cdn ? "yes" : "no"}`)
+ fetch(`./api.php?host=${in_host}&h=${check_cdn ? "yes" : "no"}&resolve=${check_ip6 ? "v6" : "v4"}`)
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -26,7 +26,7 @@ function doCheckHost(){
         var ip4Display = document.createElement("li");
         ip4Display.appendChild(ip4Text);
         resList.appendChild(ip4Display);
-        if(check_ip6){
+        if(check_ip6 !== false){
          var ip6Addr = (typeof data.resolv_addr.v6 != "undefined") ? data.resolv_addr.v6 : "감지되지 않음";
          var ip6Text = document.createTextNode(`감지된 IPv6 주소: ${ip6Addr}`);
          var ip6Display = document.createElement("li");
