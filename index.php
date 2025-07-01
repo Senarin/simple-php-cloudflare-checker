@@ -119,10 +119,10 @@ $resolv_addr = [];
 
 if(!is_null($target_host)){
   $ip4 = gethostbynamel($target_host)[0] ?? null;
-  $resolv_addr["v4"] = $ip4;
+  $resolv_addr["v4"] = $ip4 ?? null;
   if($resolv_mode == "v6"){
    $ip6 = dns_get_record($target_host, DNS_AAAA)[0]['ipv6'] ?? null;
-   $resolv_addr["v6"] = $ip6;
+   $resolv_addr["v6"] = $ip6 ?? null;
   }
 }else{
   echo json_encode(["error" => "No host provided"]);
@@ -146,27 +146,31 @@ if($resolv_mode == "v6"){
  }
 }
 
-$url_check = get_headers("https://$target_host");
+$_show_header = $_GET["h"] ?? false;
 
-foreach($url_check as $header_line){
-    if(preg_match("/^date:/i", $header_line)){$host_datetime = strtotime(trim(preg_replace("/^date:/i", "", $header_line)));}
-    if(preg_match("/^cf-ray:/i", $header_line)){
-        $cf_rayinfo = trim(explode(":", $header_line)[1]);
-        $cf_rayid = trim(explode("-", $cf_rayinfo)[0]);
-        $cf_edge = trim(explode("-", $cf_rayinfo)[1]);
-    }
+if($_show_header !== false){
+ $url_check = get_headers("https://$target_host");
+
+ foreach($url_check as $header_line){
+     if(preg_match("/^date:/i", $header_line)){$host_datetime = strtotime(trim(preg_replace("/^date:/i", "", $header_line)));}
+     if(preg_match("/^cf-ray:/i", $header_line)){
+         $cf_rayinfo = trim(explode(":", $header_line)[1]);
+         $cf_rayid = trim(explode("-", $cf_rayinfo)[0]);
+         $cf_edge = trim(explode("-", $cf_rayinfo)[1]);
+     }
+ }
 }
 
 $out_info = [
     "hostname" => $target_host,
     "resolv_addr" => $resolv_addr,
     "is_cloudflare" => $is_cf,
-    "host_timestamp" => $host_datetime,
     "cf_hostinfo" => ($is_cf != false) ? [
-        "rayid" => $cf_rayid,
-        "edge_region" => $cf_edge
+        "host_timestamp" => $host_datetime ?? "NOT_CHECKED",    
+        "rayid" => $cf_rayid ?? "NOT_CHECKED",
+        "edge_region" => $cf_edge ?? "NOT_CHECKED"
     ] : "NOT_BEHIND_CLOUDFLARE",
-    "res_headers" => $url_check
+    "res_headers" => $url_check ?? "NOT_CHECKED"
     ];
 
 echo json_encode($out_info);
