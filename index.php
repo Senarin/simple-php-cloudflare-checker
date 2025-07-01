@@ -152,10 +152,9 @@ foreach($url_check as $header_line){
     }
 }
 
-echo json_encode([
+$out_info = [
     "hostname" => $target_host,
     "resolv_addr_v4" => $ip4,
-    "resolv_addr_v6" => $ip6,
     "is_cloudflare" => $is_cf,
     "host_timestamp" => $host_datetime,
     "cf_hostinfo" => ($is_cf != false) ? [
@@ -163,6 +162,10 @@ echo json_encode([
         "edge_region" => $cf_edge
     ] : "NOT_BEHIND_CLOUDFLARE",
     "res_headers" => $url_check
-]);
+    ];
+
+if($resolv_mode == "v6" || !is_null($ip6)){$out_info["resolv_addr_v6"] = $ip6;}
+
+echo json_encode($out_info);
 
 ?>
