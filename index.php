@@ -12,6 +12,7 @@
 </head>
 <body id="mainpagebody">
 
+<div id="page-content">
 <h2>단순 Cloudflare 사용 검사기</h2>
 
 <p>이 페이지는 웹사이트가 Cloudflare를 사용하는지 여부를 검사하는 간단한 도구입니다.
@@ -29,6 +30,8 @@
 <div id="result">
  <ul id="result-list"></ul>
 </div>
+</div>
+
 
 </body>
 </html>

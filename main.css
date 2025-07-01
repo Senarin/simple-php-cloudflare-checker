@@ -29,7 +29,20 @@ body{
  }
 }
 
+#page-content{
+    width: 1024px;
+    max-width: 96%;
+    margin: auto;
+    padding: 1em;
+}
+
 input,button{font-family: inherit;}
+
+#host{
+    text-align: center !important;
+    margin: auto;
+    max-width: 70%;
+}
 
 textarea{font-family: D2Coding, "D2 coding", monospace !important;}
 
