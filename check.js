@@ -5,6 +5,7 @@ function doCheckHost(){
  var in_host = document.getElementById("host").value;
 
  var check_cdn = document.getElementById("check-cdn").checked;
+ var check_ip6 = document.getElementById("check-ip6").checked;
 
  fetch(`./api.php?host=${in_host}&h=${check_cdn ? "yes" : "no"}`)
     .then(response => {
@@ -19,17 +20,29 @@ function doCheckHost(){
 
         var hostInfoHead = document.getElementById("host-head");
         hostInfoHead.textContent = `${data.hostname}에 대한 결과`;
-        
+
+        var ip4Addr = data.resolv_addr.ipv4;
+        var ip4Text = document.createTextNode(`감지된 IPv4 주소: ${ip4Addr}`);
+        var ip4Display = document.createElement("li");
+        ip4Display.appendChild(ip4Text);
+        resList.appendChild(ip4Display);
+        if(check_ip6){
+         var ip6Addr = data.resolv_addr.ipv6;
+         var ip6Text = document.createTextNode(`감지된 IPv6 주소: ${ip6Addr}`);
+         var ip6Display = document.createElement("li");
+         ip6Display.appendChild(ip4Text);
+         resList.appendChild(ip6Display);
+        }
 
         var isUsingCF = data.is_cloudflare;
-        var isUsingCFText = document.createTextNode(isUsingCF ? "Cloudflare 사용 중" : "Cloudflare가 감지되지 않음");
+        var isUsingCFText = document.createTextNode(isUsingCF ? "Cloudflare 사용 여부: 사용 중" : "Cloudflare 사용 여부: 감지되지 않음");
         var isUsingCFDisplay = document.createElement("li");
         isUsingCFDisplay.appendChild(isUsingCFText);
         resList.appendChild(isUsingCFDisplay);
 
         if(check_cdn !== false){
             var edgeRegion = data.cf_hostinfo.edge_region;
-            var edgeRegionText = document.createTextNode(`경유 엣지: ${edgeRegion}`);
+            var edgeRegionText = document.createTextNode(`감지된 엣지 로케이션 코드: ${edgeRegion}`);
             var edgeRegionDisplay = document.createElement("li");
             edgeRegionDisplay.appendChild(edgeRegionText);
             resList.appendChild(edgeRegionDisplay);

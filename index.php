@@ -17,6 +17,7 @@
 <button id="cf-scan" onclick="doCheckHost();">Scan</button>
 <br />
 <input type="checkbox" id="check-cdn" checked /><label for="check-cdn">자세한 정보 보기</label>
+<input type="checkbox" id="check-ip6" checked /><label for="check-ip6">IPv6 주소 조회</label>
 </div>
 
 <h2><span id="host-head"></span></h2>
