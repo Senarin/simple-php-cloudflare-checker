@@ -123,14 +123,15 @@ if(!is_null($target_host)){
   echo json_encode(["error" => "No host provided"]);
   exit;
 }
-if($resolv_mode == "v4"){
- foreach(explode("\n",$cloudflare_ranges_v4) as $range) {
-     if(ip4AddressInRange($ip6,trim($range))){
-      $is_cf = true;
-      break;
-     }else{$is_cf = false;}
- }
-}elseif($resolv_mode == "v6"){
+
+foreach(explode("\n",$cloudflare_ranges_v4) as $range) {
+    if(ip4AddressInRange($ip6,trim($range))){
+     $is_cf = true;
+     break;
+    }else{$is_cf = false;}
+}
+
+if($resolv_mode == "v6"){
  foreach(explode("\n",$cloudflare_ranges_v6) as $net) {
     $ranges = explode("/",trim($net));
      if(ip6AddressInNet($ip6,$ranges[0],$ranges[1])){
@@ -139,6 +140,7 @@ if($resolv_mode == "v4"){
      }else{$is_cf = false;}
  }
 }
+
 $url_check = get_headers("https://$target_host");
 
 foreach($url_check as $header_line){
