@@ -136,7 +136,7 @@ foreach(explode("\n",$cloudflare_ranges_v4) as $range) {
     }else{$is_cf = false;}
 }
 
-if($resolv_mode == "v6"){
+if($resolv_mode == "v6" && !is_null($ip6)){
  foreach(explode("\n",$cloudflare_ranges_v6) as $net) {
     $ranges = explode("/",trim($net));
      if(ip6AddressInNet($ip6,$ranges[0],$ranges[1])){
