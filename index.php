@@ -95,7 +95,7 @@ function ip4AddressInRange($ip, $range){
     return ($ipLong >= $start && $ipLong <= $end);
 }
 
-function ip6AddresInNet($ip, $sub, $prefix){
+function ip6AddressInNet($ip, $sub, $prefix){
     $sub = inet_pton($sub);
     $ip = inet_pton($ip);
 
@@ -117,20 +117,28 @@ $target_host = $_GET["host"];
 $resolv_mode = $_GET["resolve"] ?? "v4";
 
 if(!is_null($target_host)){
-  if($resolv_mode == "v4"){$ip4 = gethostbynamel($target_host)[0] ?? null;}
+  $ip4 = gethostbynamel($target_host)[0] ?? null;
   if($resolv_mode == "v6"){$ip6 = dns_get_record($target_host, DNS_AAAA)[0]['ipv6'] ?? null;}
 }else{
   echo json_encode(["error" => "No host provided"]);
   exit;
 }
-
-foreach(explode("\n",$cloudflare_ranges_v4) as $range) {
-    if(ip4AddressInRange($ip4,trim($range))){
-     $is_cf = true;
-     break;
-    }else{$is_cf = false;}
+if($resolv_mode == "v4"){
+ foreach(explode("\n",$cloudflare_ranges_v4) as $range) {
+     if(ip4AddressInRange($ip6,trim($range))){
+      $is_cf = true;
+      break;
+     }else{$is_cf = false;}
+ }
+}elseif($resolv_mode == "v6"){
+ foreach(explode("\n",$cloudflare_ranges_v6) as $net) {
+    $ranges = explode("/",trim($net));
+     if(ip6AddressInNet($ip6,$ranges[0],$ranges[1])){
+      $is_cf = true;
+      break;
+     }else{$is_cf = false;}
+ }
 }
-
 $url_check = get_headers("https://$target_host");
 
 foreach($url_check as $header_line){
