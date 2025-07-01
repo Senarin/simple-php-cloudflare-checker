@@ -164,7 +164,7 @@ $out_info = [
     "res_headers" => $url_check
     ];
 
-if($resolv_mode == "v6" || !is_null($ip6)){$out_info["resolv_addr_v6"] = $ip6;}
+if($resolv_mode == "v6"){$out_info["resolv_addr_v6"] = $ip6;}
 
 echo json_encode($out_info);
 
