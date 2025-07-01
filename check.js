@@ -21,13 +21,13 @@ function doCheckHost(){
         var hostInfoHead = document.getElementById("host-head");
         hostInfoHead.textContent = `${data.hostname}에 대한 결과`;
 
-        var ip4Addr = data.resolv_addr.ipv4;
+        var ip4Addr = data.resolv_addr.v4;
         var ip4Text = document.createTextNode(`감지된 IPv4 주소: ${ip4Addr}`);
         var ip4Display = document.createElement("li");
         ip4Display.appendChild(ip4Text);
         resList.appendChild(ip4Display);
         if(check_ip6){
-         var ip6Addr = data.resolv_addr.ipv6;
+         var ip6Addr = data.resolv_addr.v6;
          var ip6Text = document.createTextNode(`감지된 IPv6 주소: ${ip6Addr}`);
          var ip6Display = document.createElement("li");
          ip6Display.appendChild(ip4Text);
