@@ -89,18 +89,39 @@ function ip6PrefixToRange($prefix){
     return array($addr0decval,$addr64decval,$addr0str,$addr64str);
 }
 
-function ip4AddressInRange($ip, $range) {
+function ip4AddressInRange($ip, $range){
     list($start, $end) = ip4CIDRToRange($range)[0];
     $ipLong = ip2long($ip);
     return ($ipLong >= $start && $ipLong <= $end);
 }
 
+function ip6AddresInNet($ip, $sub, $prefix){
+    $sub = inet_pton($sub);
+    $ip = inet_pton($ip);
+
+    $bprefix = str_repeat("f", $prefix / 4);
+    switch($prefix % 4){
+        case 0: break;
+        case 1: $bprefix .= "8"; break;
+        case 2: $bprefix .= "c"; break;
+        case 3: $bprefix .= "e"; break;
+    }
+    $bprefix = str_pad($bprefix,32,"0");
+    $bprefix = hex2bin($bprefix);
+
+    return ($ip & $bprefix) == $sub;
+}
+
 
 $target_host = $_GET["host"];
+$resolv_mode = $_GET["resolve"] ?? "v4";
 
 if(!is_null($target_host)){
-  $ip4 = gethostbynamel($target_host)[0];
-
+  if($resolv_mode == "v4"){$ip4 = gethostbynamel($target_host)[0] ?? null;}
+  if($resolv_mode == "v6"){$ip6 = dns_get_record($target_host, DNS_AAAA)[0]['ipv6'] ?? null;}
+}else{
+  echo json_encode(["error" => "No host provided"]);
+  exit;
 }
 
 foreach(explode("\n",$cloudflare_ranges_v4) as $range) {
@@ -118,13 +139,13 @@ foreach($url_check as $header_line){
         $cf_rayinfo = trim(explode(":", $header_line)[1]);
         $cf_rayid = trim(explode("-", $cf_rayinfo)[0]);
         $cf_edge = trim(explode("-", $cf_rayinfo)[1]);
-    
     }
 }
 
 echo json_encode([
     "hostname" => $target_host,
-    "resolv_addr" => $ip4,
+    "resolv_addr_v4" => $ip4,
+    "resolv_addr_v6" => $ip6,
     "is_cloudflare" => $is_cf,
     "host_timestamp" => $host_datetime,
     "cf_hostinfo" => ($is_cf != false) ? [
