@@ -154,7 +154,8 @@ foreach($url_check as $header_line){
 
 $out_info = [
     "hostname" => $target_host,
-    "resolv_addr_v4" => $ip4,
+    "resolv_addr_v4" => $ip4 ?? null,
+    "resolv_addr_v6" => $ip6 ?? null,
     "is_cloudflare" => $is_cf,
     "host_timestamp" => $host_datetime,
     "cf_hostinfo" => ($is_cf != false) ? [
@@ -164,8 +165,5 @@ $out_info = [
     "res_headers" => $url_check
     ];
 
-if($resolv_mode == "v6"){$out_info["resolv_addr_v6"] = $ip6;}
-
 echo json_encode($out_info);
-
 ?>
