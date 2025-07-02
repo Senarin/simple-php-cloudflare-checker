@@ -37,6 +37,8 @@ function doCheckHost(){
         var isUsingCF = data.is_cloudflare;
         var isUsingCFText = document.createTextNode(isUsingCF ? "Cloudflare 프록시/CDN 사용 중" : "Cloudflare 프록시/CDN 사용 안 함");
         var isUsingCFDisplay = document.createElement("li");
+        isUsingCFDisplay.style.fontWeight = "bold";
+        isUsingCFDisplay.style.color = isUsingCF ? "#00FF00" : "#D3D3D3";
         isUsingCFDisplay.appendChild(isUsingCFText);
         resList.appendChild(isUsingCFDisplay);
 
