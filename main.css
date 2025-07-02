@@ -48,7 +48,7 @@ input,button{font-family: inherit;}
     text-align: center !important;
     font-size: 1.25em;
     width: 480px;
-    max-width: 72%;
+    max-width: 64%;
 }
 
 textarea{font-family: D2Coding, "D2 coding", monospace !important;}
