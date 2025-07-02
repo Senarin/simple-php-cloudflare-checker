@@ -9,14 +9,11 @@ function doCheckHost(){
 
  fetch(`./api.php?host=${in_host}&h=${check_cdn ? "yes" : "no"}&resolve=${check_ip6 ? "v6" : "v4"}`)
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
+        if (!response.ok) {throw new Error(`오류 발생: ${response.statusText}`);}
         return response.json();
     }).then(data => {
         var resList = document.getElementById("result-list");
-        resList.innerHTML = "";
+        resList.innerHTML = "불러오는 중...";
 
         var hostInfoHead = document.getElementById("host-head");
         hostInfoHead.textContent = `${data.hostname}에 대한 결과`;
