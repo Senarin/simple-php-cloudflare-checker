@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
 <meta name="fediverse:creator" content="@Rina@uri.life" />
-<script src="./check.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/ea96b8b098.js" crossorigin="anonymous"></script>
+<script src="./check.js"></script>
+<script>
+$(document).ready(function(){document.getElementById("host").addEventListener("keydown", function(e) {
+    if (e.key === "Enter" || e.keyCode === 13){
+        e.preventDefault();
+        document.getElementById("cf-scan").click();
+    }
+  });
+});
+</script>
 <link rel="stylesheet" href="./main.css" />
 </head>
 <body id="mainpagebody">
