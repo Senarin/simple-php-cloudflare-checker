@@ -12,7 +12,7 @@
 <script src="./check.js"></script>
 <script>
 $(document).ready(function(){document.getElementById("host").addEventListener("keydown", function(e) {
-    if (e.key === "Enter" || e.keyCode === 13){
+    if (e.key.toLowerCase().indexOf("enter") != -1 || e.keyCode === 13){
         e.preventDefault();
         document.getElementById("cf-scan").click();
     }
@@ -46,7 +46,7 @@ $(document).ready(function(){document.getElementById("host").addEventListener("k
 <hr style="margin: 1em auto; width: 100%;" />
 
 
-<p class="about">Made with <i style="color:#FF69B4;" class="fas fa-heart"></i> by <a href="https://uri.life/@Rina">Bombyeol (aka. Haruboshi)</a>.</p>
+<p class="about">Made with <i style="color:#FF69B4;" class="fas fa-heart"></i> by <a href="https://bombyeol.me/">Bombyeol (aka. Haruboshi)</a>.</p>
 <p class="disclaimer" id="disclaimer-ko">
 면책 조항: 이 앱은 비공식이며, <a href="https://www.cloudflare.com/">Cloudflare Inc.</a>와 직접적인 연관이 없습니다.<br />
 이 앱은 <a href="https://developers.cloudflare.com/api/">Cloudflare의 공식 API</a>를 사용하지 않으며, 단순히 DNS 레코드를 조회하여 Cloudflare 사용 여부를 판단합니다.<br />
