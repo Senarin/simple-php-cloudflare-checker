@@ -56,7 +56,7 @@ function doCheckHost(){
 
         if(nameservers !== null && nameservers.length > 0){
             var nameserverText = document.createTextNode(`네임서버 목록:`);
-            nameserverSubDisplay.appendChild(nameserverText);
+            resList.appendChild(nameserverText);
             for(var i=0;i<nameservers.length;i++){
              var nameserverItem = document.createElement("li");
              nameserverItem.appendChild(document.createTextNode(nameservers[i]));
