@@ -20,19 +20,6 @@ function doCheckHost(){
         var hostInfoHead = document.getElementById("host-head");
         hostInfoHead.textContent = `${data.hostname}에 대한 결과`;
 
-        var ip4Addr = (data.resolv_addr.v4 != null) ? data.resolv_addr.v4 : "감지되지 않음";
-        var ip4Text = document.createTextNode(`감지된 IPv4 주소: ${ip4Addr}`);
-        var ip4Display = document.createElement("li");
-        ip4Display.appendChild(ip4Text);
-        resList.appendChild(ip4Display);
-        if(check_ip6 !== false){
-         var ip6Addr = (data.resolv_addr.v6 != null) ? data.resolv_addr.v6 : "감지되지 않음";
-         var ip6Text = document.createTextNode(`감지된 IPv6 주소: ${ip6Addr}`);
-         var ip6Display = document.createElement("li");
-         ip6Display.appendChild(ip6Text);
-         resList.appendChild(ip6Display);
-        }
-
         var isUsingCF = data.is_cloudflare;
         var isUsingCFText = document.createTextNode(isUsingCF ? "Cloudflare 프록시/CDN 사용 중" : "Cloudflare 프록시/CDN 사용 안 함");
         var isUsingCFDisplay = document.createElement("li");
@@ -49,9 +36,21 @@ function doCheckHost(){
             resList.appendChild(edgeRegionDisplay);
         }
 
+        var ip4Addr = (data.resolv_addr.v4 != null) ? data.resolv_addr.v4 : "감지되지 않음";
+        var ip4Text = document.createTextNode(`감지된 IPv4 주소: ${ip4Addr}`);
+        var ip4Display = document.createElement("li");
+        ip4Display.appendChild(ip4Text);
+        resList.appendChild(ip4Display);
+        if(check_ip6 !== false){
+         var ip6Addr = (data.resolv_addr.v6 != null) ? data.resolv_addr.v6 : "감지되지 않음";
+         var ip6Text = document.createTextNode(`감지된 IPv6 주소: ${ip6Addr}`);
+         var ip6Display = document.createElement("li");
+         ip6Display.appendChild(ip6Text);
+         resList.appendChild(ip6Display);
+        }
+
         var nameservers = data.resolv_nameservers;
         var nameserverSubDisplay = document.createElement("ul");
-
 
         if(nameservers !== null && nameservers.length > 0){
             var nameserverText = document.createTextNode(`네임서버 목록:`);
