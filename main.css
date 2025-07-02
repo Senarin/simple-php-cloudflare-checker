@@ -53,6 +53,12 @@ input,button{font-family: inherit;}
 
 #cf-scan{font-size: 1.25em;}
 
+.about,.disclaimer{
+    text-align: center;
+    font-size: 0.875em;
+    margin: 1em auto;
+}
+
 textarea{font-family: D2Coding, "D2 coding", monospace !important;}
 
 .material-icons {

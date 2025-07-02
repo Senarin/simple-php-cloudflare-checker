@@ -8,6 +8,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="fediverse:creator" content="@Rina@uri.life" />
 <script src="./check.js"></script>
+<script src="https://kit.fontawesome.com/ea96b8b098.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="./main.css" />
 </head>
 <body id="mainpagebody">
@@ -34,11 +35,13 @@
 
 <hr style="margin: 1em auto; width: 100%;" />
 
-<p id="disclaimer-ko">
+
+<p class="about">Made with <i style="color:#FF69B4;" class="fas fa-heart"></i> by <a href="https://uri.life/@Rina">Bombyeol (aka. Haruboshi)</a>.</p>
+<p class="disclaimer" id="disclaimer-ko">
 면책 조항: 이 앱은 비공식이며, <a href="https://www.cloudflare.com/">Cloudflare Inc.</a>와 직접적인 연관이 없습니다.<br />
 이 앱은 <a href="https://developers.cloudflare.com/api/">Cloudflare의 공식 API</a>를 사용하지 않으며, 단순히 DNS 레코드를 조회하여 Cloudflare 사용 여부를 판단합니다.<br />
 </p>
-<p id="disclaimer-en">
+<p class="disclaimer" id="disclaimer-en">
 <i>Disclaimer: This app is unofficial and is not affiliated with <a href="https://www.cloudflare.com/">Cloudflare Inc.</a><br />
 It does not use <a href="https://developers.cloudflare.com/api/">Cloudflare's official API</a> and simply checks DNS records to determine if a site is using Cloudflare.<br /></i>
 </p>
