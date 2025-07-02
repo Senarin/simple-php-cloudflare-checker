@@ -48,8 +48,10 @@ input,button{font-family: inherit;}
     text-align: center !important;
     font-size: 1.25em;
     width: 480px;
-    max-width: 64%;
+    max-width: 50%;
 }
+
+#cf-scan{font-size: 1.25em;}
 
 textarea{font-family: D2Coding, "D2 coding", monospace !important;}
 
