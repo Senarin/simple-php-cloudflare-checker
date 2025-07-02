@@ -59,7 +59,7 @@ function doCheckHost(){
             nameserverSubDisplay.appendChild(nameserverText);
             for(var i=0;i<nameservers.length;i++){
              var nameserverItem = document.createElement("li");
-             nameserverItem.appendChild(nameservers[i]);
+             nameserverItem.appendChild(document.createTextNode(nameservers[i]));
              nameserverSubDisplay.appendChild(nameserverItem);
             }
             resList.appendChild(nameserverSubDisplay);
