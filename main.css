@@ -46,7 +46,8 @@ input,button{font-family: inherit;}
 
 #host{
     text-align: center !important;
-    width: 64%;
+    font-size: 1.25em;
+    width: 480px;
     max-width: 72%;
 }
 
