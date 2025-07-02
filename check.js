@@ -50,6 +50,13 @@ function doCheckHost(){
             resList.appendChild(edgeRegionDisplay);
         }
 
+        var nameservers = data.resolv_nameservers;
+        if(nameservers !== null && nameservers.length > 0){
+            var nameserverText = document.createTextNode(`네임서버: ${nameservers.join(",")}`);
+            var nameserverDisplay = document.createElement("li");
+            nameserverDisplay.appendChild(nameserverText);
+            resList.appendChild(nameserverDisplay);
+        }
     });
 
 }

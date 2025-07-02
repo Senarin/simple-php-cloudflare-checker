@@ -117,6 +117,7 @@ function ip6AddressInNet($ip, $sub, $prefix){
 $target_host = $_GET["host"];
 $resolv_mode = $_GET["resolve"] ?? "v4";
 $resolv_addr = [];
+$resolv_nameservers = [];
 
 if(!is_null($target_host)){
   $ip4 = gethostbynamel($target_host)[0] ?? null;
@@ -125,6 +126,9 @@ if(!is_null($target_host)){
    $ip6 = dns_get_record($target_host, DNS_AAAA)[0]['ipv6'] ?? null;
    $resolv_addr["v6"] = $ip6 ?? null;
   }
+  $nameserver_data = dns_get_record($target_host,DNS_NS);
+  for($i=0;$i<count($nameserver_data);$i++){$resolv_nameservers[] = $nameserver_data[$i]['target'];}
+
 }else{
   echo json_encode(["error" => "No host provided"]);
   exit;
@@ -171,6 +175,7 @@ $out_info = [
         "rayid" => $cf_rayid ?? "NOT_CHECKED",
         "edge_region" => $cf_edge ?? "NOT_CHECKED"
     ] : "NOT_BEHIND_CLOUDFLARE",
+    "resolv_nameservers" => $resolv_nameservers ?? null,
     "res_headers" => $url_check ?? "NOT_CHECKED"
     ];
 
