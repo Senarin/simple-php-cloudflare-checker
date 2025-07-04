@@ -24,14 +24,14 @@ $(document).ready(function(){document.getElementById("host").addEventListener("k
 <body id="mainpagebody">
 
 <div id="page-content">
-<h2>단순 Cloudflare 사용 검사기</h2>
+<h2>Cloudflare 사용 체크 도구</h2>
 
 <p>이 페이지는 웹사이트가 Cloudflare를 사용하는지 여부를 검사하는 간단한 도구입니다.
-<br />아래 입력란에 도메인명을 입력하고 "Scan" 버튼을 클릭하면 해당 도메인이 Cloudflare를 사용하고 있는지 확인할 수 있습니다.</p>
+<br />아래 입력란에 도메인명을 입력하고 "스캔하기" 버튼을 클릭하면 해당 도메인이 Cloudflare를 사용하고 있는지 확인할 수 있습니다.</p>
 
 <div id="check-form">
 도메인명 : <input type="text" name="hostname" id="host" placeholder="www.example.com" size="16" />
-<button id="cf-scan" onclick="doCheckHost();">Scan</button>
+<button id="cf-scan" onclick="doCheckHost();">스캔하기</button>
 <br />
 <input type="checkbox" id="check-cdn" checked /><label for="check-cdn">자세한 정보 보기</label>
 <input type="checkbox" id="check-ip6" checked /><label for="check-ip6">IPv6 주소 조회</label>
