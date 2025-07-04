@@ -48,11 +48,11 @@ $(document).ready(function(){document.getElementById("host").addEventListener("k
 
 <p class="about">Made with <i style="color:#FF69B4;" class="fas fa-heart"></i> by <a href="https://bombyeol.me/">Bombyeol (aka. Haruboshi)</a>.</p>
 <p class="disclaimer" id="disclaimer-ko">
-면책 조항: 이 앱은 비공식이며, <a href="https://www.cloudflare.com/">Cloudflare Inc.</a>와 직접적인 연관이 없습니다.<br />
+면책 조항: 이 앱은 <a href="https://www.cloudflare.com/">Cloudflare Inc.</a>와 직접적으로 연관이 없습니다.<br />
 이 앱은 <a href="https://developers.cloudflare.com/api/">Cloudflare의 공식 API</a>를 사용하지 않으며, 단순히 DNS 레코드를 조회하여 Cloudflare 사용 여부를 판단합니다.<br />
 </p>
 <p class="disclaimer" id="disclaimer-en">
-<i>Disclaimer: This app is unofficial and is not affiliated with <a href="https://www.cloudflare.com/">Cloudflare Inc.</a><br />
+<i>Disclaimer: This app is not affiliated with <a href="https://www.cloudflare.com/">Cloudflare Inc.</a><br />
 It does not use <a href="https://developers.cloudflare.com/api/">Cloudflare's official API</a> and simply checks DNS records to determine if a site is using Cloudflare.<br /></i>
 </p>
 </body>

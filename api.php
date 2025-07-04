@@ -291,6 +291,7 @@ $resolv_addr = [];
 $resolv_nameservers = [];
 
 if(!is_null($target_host)){
+  $target_host = idn_to_ascii(strtolower(trim($target_host)), IDNA_NONTRANSITIONAL_TO_ASCII | IDNA_CHECK_BIDI | IDNA_ALLOW_UNASSIGNED);
   $ip4 = gethostbynamel($target_host)[0] ?? null;
   $resolv_addr["v4"] = $ip4 ?? null;
   if($resolv_mode == "v6"){

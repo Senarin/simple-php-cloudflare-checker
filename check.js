@@ -4,6 +4,8 @@
 function doCheckHost(){
  var in_host = document.getElementById("host").value;
 
+ if(in_host.length < 1){alert("도메인 이름을 입력해주세요!"); return;}
+
  var check_cdn = document.getElementById("check-cdn").checked;
  var check_ip6 = document.getElementById("check-ip6").checked;
 
@@ -11,7 +13,10 @@ function doCheckHost(){
 
  fetch(`./api.php?host=${in_host}&h=${check_cdn ? "yes" : "no"}&resolve=${check_ip6 ? "v6" : "v4"}`)
     .then(response => {
-        if (!response.ok) {throw new Error(`오류 발생: ${response.statusText}`);}
+        if (!response.ok) {
+         alert(`오류 발생: ${response.statusText}`);
+         throw new Error(`오류 발생: ${response.statusText}`);
+        }
         return response.json();
     }).then(data => {
         var resList = document.getElementById("result-list");
