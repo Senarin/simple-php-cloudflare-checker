@@ -200,8 +200,6 @@ $cloudflare_ranges_v6 = <<<END
 2c0f:f248::/32
 END;
 
-header("Content-type: application/json");
-header("Access-Control-Allow-Origin: *");
 
 function ip4CIDRToRange($cidr){
    $rdec = array();
@@ -284,6 +282,8 @@ function ip6AddressInNet($ip, $sub, $prefix){
     return ($ip & $bprefix) == $sub;
 }
 
+header("Content-type: application/json");
+header("Access-Control-Allow-Origin: *");
 
 $target_host = $_GET["host"];
 $resolv_mode = $_GET["resolve"] ?? "v4";
@@ -301,6 +301,7 @@ if(!is_null($target_host)){
   for($i=0;$i<count($nameserver_data);$i++){$resolv_nameservers[] = $nameserver_data[$i]['target'];}
 
 }else{
+  http_response_code(400);
   echo json_encode(["error" => "No host provided"]);
   exit;
 }
