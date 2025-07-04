@@ -9,6 +9,9 @@ function doCheckHost(){
  var check_cdn = document.getElementById("check-cdn").checked;
  var check_ip6 = document.getElementById("check-ip6").checked;
 
+ var hostInfoHead = document.getElementById("host-head");
+ hostInfoHead.textContent = `${in_host}에 대한 결과`;
+
  document.getElementById("result-list").innerHTML = "결과를 가져오는 중...";
 
  fetch(`./api.php?host=${in_host}&h=${check_cdn ? "yes" : "no"}&resolve=${check_ip6 ? "v6" : "v4"}`)
@@ -21,10 +24,7 @@ function doCheckHost(){
     }).then(data => {
         var resList = document.getElementById("result-list");
         resList.innerHTML = "";
-
-        var hostInfoHead = document.getElementById("host-head");
-        hostInfoHead.textContent = `${data.hostname}에 대한 결과`;
-
+        
         var isUsingCF = data.is_cloudflare;
         var isUsingCFText = document.createTextNode(isUsingCF ? "Cloudflare 프록시/CDN 사용 중" : "Cloudflare 프록시/CDN 사용 안 함");
         var isUsingCFDisplay = document.createElement("li");
